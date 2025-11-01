@@ -20,10 +20,12 @@ class Prescription
     this.note}) : id = id ?? uuid.v4(), prescription_date = prescription_date;
 
 
-  void addPrescriptionItem(List<Medication> medications)
+  void addPrescriptionItem(PrescriptionItem item)
   {
-    items.add(medications);
+    items.add(item);
   }
+
+  
 
   
 
