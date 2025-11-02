@@ -1,26 +1,29 @@
-import 'package:hospital_prescription_management/domain/patient.dart';
-import 'package:hospital_prescription_management/domain/prescription.dart';
-import 'package:hospital_prescription_management/domain/prescription_item.dart';
+import 'package:uuid/uuid.dart';
 
-class Doctor
-{
+class Doctor {
   final String id;
   final String firstName;
   final String lastName;
   final String specialization;
 
+  Doctor({
+    String? id,
+    required this.firstName,
+    required this.lastName,
+    required this.specialization,
+  }) : id = id ?? const Uuid().v4();
 
-  Doctor({String? id,
-   required this.firstName,
-   required this.lastName,
-   required this.specialization}) : id = id ?? uuid.v4();
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'firstName': firstName,
+        'lastName' : lastName,
+        'specialization': specialization,
+      };
 
-
-   void createPrecription(Patient patient, List<PrescriptionItem> item)
-   {
-      Prescription prescription = Prescription(doctor_id: id, patient_id: patient.id, prescription_date: DateTime.now(), items: item);
-
-      print('yes');
-   }
-
+  factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
+        id: json['id'],
+        firstName: json['firstName'],
+        lastName: json['LastName'],
+        specialization: json['specialization'],
+      );
 }
