@@ -1,0 +1,23 @@
+[
+  {
+    "id": "m-1",
+    "name": "Paracetamol",
+    "description": "Pain reliever / fever reducer",
+    "dosageForm": "tablet",
+    "instruction": "after the meal 15 minute"
+  },
+  {
+    "id": "m-2",
+    "name": "Amoxicillin",
+    "description": "Antibiotic",
+    "dasageForm": "capsule",
+    "instruction": "after the before 15 minute"
+  },
+  {
+    "id": "m-3",
+    "name": "Ibuprofen",
+    "description": "NSAID, pain and inflammation",
+    "dasageForm": "tablet",
+    "instruction": "after the after 15 minute"
+  }
+]
