@@ -1,8 +1,22 @@
 import '../domain/medical_log.dart';
 import 'json_storage_helper.dart';
+import 'dart:io';
 
 class MedicalLogRepository {
-  final String filePath = 'data/medical_logs.json';
+    String get filePath {
+    final candidates = [
+      'code/lib/data/medical_logs.json',
+      'lib/data/medical_logs.json',
+      'data/medical_logs.json',
+    ];
+    for (final p in candidates) {
+      if (File(p).existsSync()) return p;
+    }
+    const defaultPath = 'code/lib/data/medical_logs.json';
+    final dir = File(defaultPath).parent;
+    if (!dir.existsSync()) dir.createSync(recursive: true);
+    return defaultPath;
+  }
 
   List<MedicalLog> getAll() {
     final data = JsonStorageHelper.readJsonList(filePath);

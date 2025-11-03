@@ -7,6 +7,7 @@ class Prescription {
   final String id;
   final String doctor_id;
   final String patient_id;
+  final String diagnosis;
   DateTime prescription_date;
   List<PrescriptionItem> items;
   final String? note;
@@ -15,6 +16,7 @@ class Prescription {
     String? id,
     required this.doctor_id,
     required this.patient_id,
+    required this.diagnosis,
     required this.prescription_date,
     required this.items,
      this.note,
@@ -32,7 +34,8 @@ class Prescription {
       id: json['id'] as String?,
       doctor_id: json['doctor_id'] as String,
       patient_id: json['patient_id'] as String,
-      prescription_date: DateTime.parse(json['prescription_date'] as String),
+      diagnosis: json['diagnosis'] as String,
+       prescription_date: DateTime.parse(json['prescription_date'] as String),
       items: itemsJson
           .map((e) => PrescriptionItem.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -44,6 +47,7 @@ class Prescription {
         'id': id,
         'doctor_id': doctor_id,
         'patient_id': patient_id,
+        'diagnosis' : diagnosis,
         'prescription_date': prescription_date.toIso8601String(),
         'items': items.map((i) => i.toJson()).toList(),
         'note': note,
@@ -51,6 +55,6 @@ class Prescription {
 
   @override
   String toString() {
-    return 'Prescription{id: $id, doctor_id: $doctor_id, patient_id: $patient_id, date: ${prescription_date.toIso8601String()}, items: ${items.length}}';
+    return 'Prescription{id: $id, doctor_id: $doctor_id, patient_id: $patient_id, diagnosis: $diagnosis, date: ${prescription_date.toIso8601String()}, items: ${items.length}}';
   }
 }

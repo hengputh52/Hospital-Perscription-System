@@ -1,0 +1,26 @@
+[
+    {
+        "id": "b56d3703-3ed1-49aa-9174-327dfd8edbe2",
+        "doctor_id": "3d69fe9e-34c2-409d-b2a0-50260568f8b6",
+        "patient_id": "f546675c-a07a-4b83-a1d4-ab0b763fb8fd",
+        "diagnosis": "fever",
+        "prescription_date": "2025-11-03T20:46:36.120484",
+        "items": [
+            {
+                "id": "0482e622-7838-4311-8318-84fddb4645a7",
+                "medication_id": "f774fc63-802c-4007-9d8e-65f6b849ac9c",
+                "quantity": 1,
+                "frequency": "3 times a day",
+                "duration": 30
+            },
+            {
+                "id": "824811e7-c3d7-491c-84f3-0fb9f506cde3",
+                "medication_id": "70c85916-663e-4618-a12b-d23719356e2c",
+                "quantity": 2,
+                "frequency": "2 time a day",
+                "duration": 10
+            }
+        ],
+        "note": "avoid cold water"
+    }
+]
