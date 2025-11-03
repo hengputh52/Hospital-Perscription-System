@@ -1,8 +1,22 @@
 import '../domain/prescription.dart';
 import 'json_storage_helper.dart';
+import 'dart:io';
 
 class PrescriptionRepository {
-  final String filePath = '../data/prescriptions.json';
+  String get filePath {
+    final candidates = [
+      'code/lib/data/prescriptions.json',
+      'lib/data/prescriptions.json',
+      'data/prescriptions.json',
+    ];
+    for (final p in candidates) {
+      if (File(p).existsSync()) return p;
+    }
+    const defaultPath = 'code/lib/data/prescriptions.json';
+    final dir = File(defaultPath).parent;
+    if (!dir.existsSync()) dir.createSync(recursive: true);
+    return defaultPath;
+  }
 
   List<Prescription> getAll() {
     final data = JsonStorageHelper.readJsonList(filePath);
@@ -16,7 +30,12 @@ class PrescriptionRepository {
   }
 
   List<Prescription> getByPatientId(String patientId) {
-    return getAll().where((p) => p.patient_id == patientId).toList();
+    final found = getAll().where((p) => p.patient_id == patientId).toList();
+    if(found.isEmpty)
+    {
+      throw StateError("No prescription for this patientID");
+    }
+    return found;
   }
 
   Prescription? findById(String id) {

@@ -2,7 +2,7 @@ import 'package:uuid/uuid.dart';
 
 class Patient {
   final String id;
-  final String fistName;
+  final String firstName;
   final String lastName;
   int age;
   final String contact;
@@ -10,7 +10,7 @@ class Patient {
 
   Patient({
     String? id,
-    required this.fistName,
+    required this.firstName,
     required this.lastName,
     required this.age,
     required this.contact
@@ -18,7 +18,7 @@ class Patient {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'firstName': fistName,
+        'firstName': firstName,
         'lastName' : lastName,
         'age': age,
         'contact' : contact
@@ -26,7 +26,7 @@ class Patient {
 
   factory Patient.fromJson(Map<String, dynamic> json) => Patient(
         id: json['id'],
-        fistName: json['firstName'],
+        firstName: json['firstName'],
         lastName: json['lastName'],
         age: json['age'],
         contact: json['contact']

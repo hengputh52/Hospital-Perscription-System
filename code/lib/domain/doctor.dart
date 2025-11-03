@@ -16,14 +16,14 @@ class Doctor {
   Map<String, dynamic> toJson() => {
         'id': id,
         'firstName': firstName,
-        'lastName' : lastName,
+        'lastName': lastName,
         'specialization': specialization,
       };
 
   factory Doctor.fromJson(Map<String, dynamic> json) => Doctor(
-        id: json['id'],
-        firstName: json['firstName'],
-        lastName: json['LastName'],
-        specialization: json['specialization'],
+        id: json['id'] as String?,
+        firstName: (json['firstName'] ?? json['first_name'] ?? '') as String,
+        lastName: (json['lastName'] ?? json['last_name'] ?? '') as String,
+        specialization: (json['specialization'] ?? '') as String,
       );
 }

@@ -1,23 +1,163 @@
 [
   {
-    "id": "m-1",
+    "id": "f774fc63-802c-4007-9d8e-65f6b849ac9c",
     "name": "Paracetamol",
     "description": "Pain reliever / fever reducer",
     "dosageForm": "tablet",
     "instruction": "after the meal 15 minute"
   },
   {
-    "id": "m-2",
+    "id": "70c85916-663e-4618-a12b-d23719356e2c",
     "name": "Amoxicillin",
     "description": "Antibiotic",
-    "dasageForm": "capsule",
+    "dosageForm": "tablet",
     "instruction": "after the before 15 minute"
   },
   {
-    "id": "m-3",
+    "id": "da2f2b06-4549-4083-a579-3ca2dbd1ab5c",
     "name": "Ibuprofen",
     "description": "NSAID, pain and inflammation",
-    "dasageForm": "tablet",
+    "dosageForm": "tablet",
     "instruction": "after the after 15 minute"
+  },
+  {
+    "id": "1ea8e807-b926-4c82-aaa9-3285da40deb0",
+    "name": "Paracetamol",
+    "description": "Pain reliever / fever reducer",
+    "dosageForm": "tablet",
+    "instruction": "Take after meal, every 6 hours if needed"
+  },
+  {
+    "id": "8f5b72fd-e763-4e8c-bb6f-014a3a493805",
+    "name": "Amoxicillin",
+    "description": "Antibiotic for bacterial infections",
+    "dosageForm": "capsule",
+    "instruction": "Take every 8 hours for 7 days"
+  },
+  {
+    "id": "5f898f25-4058-4a1c-982f-a982db7c978b",
+    "name": "Ibuprofen",
+    "description": "Reduces inflammation, pain, and fever",
+    "dosageForm": "tablet",
+    "instruction": "Take with food every 6–8 hours"
+  },
+  {
+    "id": "42dbf9bb-79b7-4ba0-a686-ca91b2abb381",
+    "name": "Cetirizine",
+    "description": "Used for allergy relief",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily before bedtime"
+  },
+  {
+    "id": "b3c3d743-be9f-4cb3-8ca0-5156cc21e96f",
+    "name": "Omeprazole",
+    "description": "Reduces stomach acid",
+    "dosageForm": "capsule",
+    "instruction": "Take 30 minutes before breakfast"
+  },
+  {
+    "id": "d613c9aa-1886-41b1-9f79-e3ab29c258f6",
+    "name": "Metformin",
+    "description": "Controls blood sugar levels",
+    "dosageForm": "tablet",
+    "instruction": "Take after meals twice daily"
+  },
+  {
+    "id": "1d96487d-f20a-4d74-a7b1-271193ee307c",
+    "name": "Losartan",
+    "description": "Treats high blood pressure",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily at the same time"
+  },
+  {
+    "id": "feb383f6-3f1d-4dc7-a335-3e268130fba6",
+    "name": "Atorvastatin",
+    "description": "Lowers cholesterol levels",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily at night"
+  },
+  {
+    "id": "1e82edf5-95b1-477c-91cb-c94e72ee5d55",
+    "name": "Aspirin",
+    "description": "Pain relief, reduces risk of heart attack",
+    "dosageForm": "tablet",
+    "instruction": "Take after meals once daily"
+  },
+  {
+    "id": "4b5b13ed-3726-40d3-8dd4-0f62a55be892",
+    "name": "Salbutamol",
+    "description": "Relieves asthma and breathing problems",
+    "dosageForm": "inhaler",
+    "instruction": "Inhale as prescribed during attack"
+  },
+  {
+    "id": "43ad31a4-68c9-4e2b-adf0-cfab75a9fb31",
+    "name": "Prednisolone",
+    "description": "Reduces inflammation, treats allergies",
+    "dosageForm": "tablet",
+    "instruction": "Take in morning after food"
+  },
+  {
+    "id": "5e29bfc4-150e-4f67-8bcb-ed74171f2121",
+    "name": "Doxycycline",
+    "description": "Antibiotic for various infections",
+    "dosageForm": "capsule",
+    "instruction": "Take with water after meal"
+  },
+  {
+    "id": "71c1adde-cbbb-4b06-a9d4-b9829fa55e05",
+    "name": "Loratadine",
+    "description": "Relieves allergy symptoms",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily"
+  },
+  {
+    "id": "3e4a4d12-f545-40ee-a22b-abc58c94667b",
+    "name": "Azithromycin",
+    "description": "Antibiotic for respiratory infections",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily for 3 days"
+  },
+  {
+    "id": "106e2ec0-5511-4f82-a66b-80204f9164ac",
+    "name": "Ciprofloxacin",
+    "description": "Antibiotic for urinary and GI infections",
+    "dosageForm": "tablet",
+    "instruction": "Take every 12 hours"
+  },
+  {
+    "id": "5600c5e0-dfe2-4685-96a3-f57030f65501",
+    "name": "Vitamin C",
+    "description": "Supports immune function",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily after meal"
+  },
+  {
+    "id": "f697346c-2008-4d42-bd86-8be79fa566c2",
+    "name": "Folic Acid",
+    "description": "Vitamin supplement for anemia prevention",
+    "dosageForm": "tablet",
+    "instruction": "Take once daily in morning"
+  },
+  {
+    "id": "4b9f36e8-aa40-4d78-94b5-30b271174481",
+    "name": "Insulin",
+    "description": "Controls blood glucose levels",
+    "dosageForm": "injection",
+    "instruction": "Inject before meals as prescribed"
+  },
+  {
+    "id": "5de5c0de-3e44-4e45-987a-c0a07bf200e3",
+    "name": "Hydrochlorothiazide",
+    "description": "Diuretic for blood pressure and swelling",
+    "dosageForm": "tablet",
+    "instruction": "Take in morning"
+  },
+  {
+    "id": "9c6e2180-5123-4cde-8e83-0faa41af64e3",
+    "name": "Ranitidine",
+    "description": "Reduces stomach acid and heartburn",
+    "dosageForm": "tablet",
+    "instruction": "Take before bed or as needed"
   }
 ]
