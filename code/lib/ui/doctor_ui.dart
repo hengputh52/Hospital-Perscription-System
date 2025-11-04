@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:hospital_prescription_management/repository/patient_repository.dart';
+
 import '../repository/prescription_repository.dart';
 import '../repository/medication_repository.dart';
 import '../domain/prescription.dart';
@@ -10,8 +12,10 @@ class DoctorUI {
   final PrescriptionRepository prescriptionRepo;
   final MedicationRepository medicationRepo;
   final DoctorRepository doctorRepo;
+  final PatientRepository patientRepo;
+  
 
-  DoctorUI(this.prescriptionRepo, this.medicationRepo, this.doctorRepo);
+  DoctorUI(this.prescriptionRepo, this.medicationRepo, this.doctorRepo, this.patientRepo);
 
   
 
@@ -53,9 +57,149 @@ class DoctorUI {
     print("Prescription created successfully!");
   }
 
+    void updatePrescription() {
+    stdout.write('\nEnter prescription id to update: ');
+    final presId = stdin.readLineSync()?.trim();
+    if (presId == null || presId.isEmpty) {
+      print('Invalid prescription id.');
+      return;
+    }
+
+    final existing = prescriptionRepo.findById(presId);
+    if (existing == null) {
+      print('Prescription not found: $presId');
+      return;
+    }
+
+    // Work on a mutable copy of items
+    final items = existing.items.toList();
+    String diagnosis = existing.diagnosis;
+    String? note = existing.note;
+
+    var done = false;
+    while (!done) {
+      print('\n--- Update Prescription ${existing.id} ---');
+      print('1. Edit diagnosis (current: $diagnosis)');
+      print('2. Edit note (current: ${note ?? "none"})');
+      print('3. List items');
+      print('4. Add item');
+      print('5. Edit item');
+      print('6. Remove item');
+      print('0. Save and exit');
+      stdout.write('Choose option: ');
+      final choice = int.tryParse(stdin.readLineSync() ?? '') ?? -1;
+
+      switch (choice) {
+        case 1:
+          stdout.write('New diagnosis: ');
+          final d = stdin.readLineSync();
+          if (d != null && d.trim().isNotEmpty) diagnosis = d.trim();
+          break;
+        case 2:
+          stdout.write('New note (empty to clear): ');
+          final n = stdin.readLineSync();
+          note = (n != null && n.trim().isNotEmpty) ? n.trim() : null;
+          break;
+        case 3:
+          if (items.isEmpty) {
+            print('No items.');
+          } else {
+            for (var i = 0; i < items.length; i++) {
+              final it = items[i];
+              final med = medicationRepo.findById(it.medication_id);
+              final name = med?.name ?? it.medication_id;
+              print('$i) $name (id:${it.medication_id}) qty:${it.quantity} freq:${it.frequency} dur:${it.duration}');
+            }
+          }
+          break;
+        case 4:
+          stdout.write('Medication id: ');
+          final medId = stdin.readLineSync()?.trim();
+          if (medId == null || medId.isEmpty) {
+            print('Invalid medication id.');
+            break;
+          }
+          stdout.write('Quantity: ');
+          final qty = int.tryParse(stdin.readLineSync() ?? '') ?? 1;
+          stdout.write('Frequency: ');
+          final freq = stdin.readLineSync() ?? 'daily';
+          stdout.write('Duration (days): ');
+          final dur = int.tryParse(stdin.readLineSync() ?? '') ?? 1;
+          items.add(PrescriptionItem(medication_id: medId, quantity: qty, duration: dur, frequency: freq));
+          print('Item added.');
+          break;
+        case 5:
+          if (items.isEmpty) {
+            print('No items to edit.');
+            break;
+          }
+          stdout.write('Enter item index to edit: ');
+          final idx = int.tryParse(stdin.readLineSync() ?? '') ?? -1;
+          if (idx < 0 || idx >= items.length) {
+            print('Invalid index.');
+            break;
+          }
+          final old = items[idx];
+          stdout.write('New quantity (current ${old.quantity}): ');
+          final nQty = int.tryParse(stdin.readLineSync() ?? '') ?? old.quantity;
+          stdout.write('New frequency (current ${old.frequency}): ');
+          final nFreq = stdin.readLineSync();
+          stdout.write('New duration (current ${old.duration}): ');
+          final nDur = int.tryParse(stdin.readLineSync() ?? '') ?? old.duration;
+          // preserve id
+          items[idx] = PrescriptionItem(
+            id: old.id,
+            medication_id: old.medication_id,
+            quantity: nQty,
+            frequency: (nFreq == null || nFreq.trim().isEmpty) ? old.frequency : nFreq.trim(),
+            duration: nDur,
+          );
+          print('Item updated.');
+          break;
+        case 6:
+          if (items.isEmpty) {
+            print('No items to remove.');
+            break;
+          }
+          stdout.write('Enter item index to remove: ');
+          final rIdx = int.tryParse(stdin.readLineSync() ?? '') ?? -1;
+          if (rIdx < 0 || rIdx >= items.length) {
+            print('Invalid index.');
+            break;
+          }
+          items.removeAt(rIdx);
+          print('Item removed.');
+          break;
+        case 0:
+          done = true;
+          break;
+        default:
+          print('Invalid option.');
+      }
+    }
+
+    // Build updated prescription (preserve id and created fields)
+    final updated = Prescription(
+      id: existing.id,
+      doctor_id: existing.doctor_id,
+      patient_id: existing.patient_id,
+      diagnosis: diagnosis,
+      prescription_date: existing.prescription_date,
+      items: items,
+      note: note,
+    );
+
+    // Persist using repository update
+    prescriptionRepo.update(updated);
+    print('Prescription updated and saved.');
+  }
+
   void displayAllPrescriptions()
   {
     final allPrescription = prescriptionRepo.getAll();
+    final allPatient = patientRepo.getAll();
+    final allDoctor = doctorRepo.getAll();
+    final allMedication = medicationRepo.getAll();
     if(allPrescription.isEmpty)
     {
       print("No prescription found.");
@@ -64,14 +208,36 @@ class DoctorUI {
     for(final all in allPrescription)
     {
       print('\n=== Prescription ${all.id} ===');
-      print('Doctor: ${all.doctor_id}');
-      print('Patient: ${all.patient_id}');
+      //print('Doctor: ${all.doctor_id}');
+      
+      for(final doctor in allDoctor)
+      {
+        print("Doctor FirstName: ${doctor.firstName}");
+        print("Doctor Last Name: ${doctor.lastName}");
+        print("Specialization: ${doctor.specialization}");
+      }
+      //print('Patient: ${all.patient_id}');
+      for(final patient in allPatient)
+      {
+        print("Patient FirstName: ${patient.firstName}");
+        print("Patient Last Name: ${patient.lastName}");
+        print("Age: ${patient.age}");
+        print("Contact: ${patient.contact}");
+      }
       print('Diagnosis: ${all.diagnosis}');
       print('Date: ${all.prescription_date.toIso8601String()}');
       if (all.note != null && all.note!.isNotEmpty) print('Note: ${all.note}');
       print('Items:');
       for (final med in all.items) {
-        print(' - medId: ${med.medication_id}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
+        for(final m in allMedication)
+        {
+          if(m.id == med.medication_id)
+          {
+            print(' - Medication: ${m.name}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
+
+          }
+        }
+        //print(' - medId: ${med.medication_id}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
       }
     }
   }
@@ -80,17 +246,30 @@ class DoctorUI {
   void displayPrescriptionByPatientID(String patientID)
   {
     final patientPrescription = prescriptionRepo.getByPatientId(patientID);
+    final patientInfo = patientRepo.findById(patientID);
+    final medicationInfo = medicationRepo.getAll();
     for(final presctiption in patientPrescription)
     {
       print("\n=== Prescription ${presctiption.id}");
-      print('Doctor: ${presctiption.doctor_id}');
-      print('Patient: ${presctiption.patient_id}');
+      //print('Doctor: ${presctiption.doctor_id}');
+      print("Patient First Name: ${patientInfo!.firstName}");
+      print("Patient First Name: ${patientInfo.lastName}");
+      print("Patient First Name: ${patientInfo.age}");
+      print("Patient First Name: ${patientInfo.contact}");
+      //print('Patient: ${presctiption.patient_id}');
       print('Diagnosis: ${presctiption.diagnosis}');
       print('Date: ${presctiption.prescription_date.toIso8601String()}');
       if (presctiption.note != null && presctiption.note!.isNotEmpty) print('Note: ${presctiption.note}');
       print('Items:');
       for (final med in presctiption.items) {
-        print(' - medId: ${med.medication_id}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
+        for(final medication in medicationInfo)
+        {
+          if(medication.id == med.medication_id)
+          {
+            print(' - Mediation: ${medication.name}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
+            print("Description: ${medication.description}, Instruction: ${medication.instruction}");
+          }
+        }
       }
     }
     
