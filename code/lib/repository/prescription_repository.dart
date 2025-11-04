@@ -29,6 +29,17 @@ class PrescriptionRepository {
     JsonStorageHelper.writeJsonList(filePath, prescriptions.map((e) => e.toJson()).toList());
   }
 
+    void update(Prescription prescription) {
+    final prescriptions = getAll();
+    final index = prescriptions.indexWhere((p) => p.id == prescription.id);
+    if (index >= 0) {
+      prescriptions[index] = prescription;
+    } else {
+      prescriptions.add(prescription);
+    }
+    JsonStorageHelper.writeJsonList(filePath, prescriptions.map((e) => e.toJson()).toList());
+  }
+
   List<Prescription> getByPatientId(String patientId) {
     final found = getAll().where((p) => p.patient_id == patientId).toList();
     if(found.isEmpty)

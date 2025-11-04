@@ -100,7 +100,7 @@ class PatientUI {
 
   void viewMedical_log()
   {
-    stdout.write("Enter your ID: ");
+    stdout.write("Enter your pateint ID: ");
     final patientID = stdin.readLineSync()?.trim();
     if (patientID == null || patientID.isEmpty) {
       print('Invalid patient id.');

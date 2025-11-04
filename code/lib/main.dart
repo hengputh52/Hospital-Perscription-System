@@ -17,7 +17,7 @@ void main() {
   final doctorRepo = DoctorRepository();
   final patientRepo = PatientRepository();
 
-  final doctorUI = DoctorUI(prescriptionRepo, medicationRepo, doctorRepo);
+  final doctorUI = DoctorUI(prescriptionRepo, medicationRepo, doctorRepo, patientRepo);
   final patientUI = PatientUI(medicalLogRepo, patientRepo, prescriptionRepo, medicationRepo);
   final pharmacistUI = PharmacistUI(medicationRepo);
 
@@ -48,7 +48,8 @@ void main() {
           print("2. Create prescription for patient");
           print("3. View all prescription ");
           print("4. View prescription by patientID");
-          print("5. View medical log (not implemented)");
+          print("5. Update prescription");
+          print("6. View medical log");
           stdout.write("Enter your choice: ");
           final choice = int.tryParse(stdin.readLineSync() ?? '') ?? -1;
           switch (choice) {
@@ -76,7 +77,12 @@ void main() {
               doctorUI.displayPrescriptionByPatientID(patientID);
               break;
             case 5:
+              doctorUI.updatePrescription();
               break;
+            case 6:
+              patientUI.viewMedical_log();
+              break;
+
             default:
               print("Invalid choice.");
           }

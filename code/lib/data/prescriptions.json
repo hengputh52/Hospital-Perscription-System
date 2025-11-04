@@ -16,9 +16,9 @@
             {
                 "id": "824811e7-c3d7-491c-84f3-0fb9f506cde3",
                 "medication_id": "70c85916-663e-4618-a12b-d23719356e2c",
-                "quantity": 2,
-                "frequency": "2 time a day",
-                "duration": 10
+                "quantity": 3,
+                "frequency": "3 times a day",
+                "duration": 15
             }
         ],
         "note": "avoid cold water"
