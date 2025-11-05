@@ -22,5 +22,22 @@
             }
         ],
         "note": "avoid cold water"
+    },
+    {
+        "id": "9254f1db-ceb9-4f11-b582-6e84e5dfa4b7",
+        "doctor_id": "dcf9c621-a65b-46f4-80a0-7105e93df040",
+        "patient_id": "ce932a8d-e0e3-4e1c-b64f-c46e3a603969",
+        "diagnosis": "cold",
+        "prescription_date": "2025-11-05T22:45:40.545954",
+        "items": [
+            {
+                "id": "19289f63-a14b-484a-9a7b-68100559bf40",
+                "medication_id": "7c50d097-be22-4a80-991f-1dedfa046821",
+                "quantity": 1,
+                "frequency": "2 times a day",
+                "duration": 3
+            }
+        ],
+        "note": "do not drink cold water"
     }
 ]
