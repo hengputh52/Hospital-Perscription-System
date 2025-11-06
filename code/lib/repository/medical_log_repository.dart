@@ -3,7 +3,7 @@ import 'json_storage_helper.dart';
 import 'dart:io';
 
 class MedicalLogRepository {
-    String get filePath {
+  String get filePath {
     final candidates = [
       'code/lib/data/medical_logs.json',
       'lib/data/medical_logs.json',
@@ -20,7 +20,8 @@ class MedicalLogRepository {
 
   List<MedicalLog> getAll() {
     final data = JsonStorageHelper.readJsonList(filePath);
-    return data.map((e) => MedicalLog.fromJson(e)).toList();
+    final maps = data.whereType<Map<String, dynamic>>();
+    return maps.map((e) => MedicalLog.fromJson(e)).toList();
   }
 
   void add(MedicalLog log) {
@@ -35,5 +36,26 @@ class MedicalLogRepository {
 
   List<MedicalLog> getByPrescription(String prescriptionId) {
     return getAll().where((l) => l.prescription_id == prescriptionId).toList();
+  }
+
+  // AI-generated
+  bool deleteById(String logId) {
+    final logs = getAll();
+    final initialLen = logs.length;
+    final remaining = logs.where((l) => l.log_id != logId).toList();
+    if (remaining.length == initialLen) return false;
+    JsonStorageHelper.writeJsonList(filePath, remaining.map((e) => e.toJson()).toList());
+    return true;
+  }
+
+  /// Delete all logs for a given prescription id. Returns number deleted.
+  int deleteByPrescriptionId(String prescriptionId) {
+    final logs = getAll();
+    final remaining = logs.where((l) => l.prescription_id != prescriptionId).toList();
+    final deleted = logs.length - remaining.length;
+    if (deleted > 0) {
+      JsonStorageHelper.writeJsonList(filePath, remaining.map((e) => e.toJson()).toList());
+    }
+    return deleted;
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 class JsonStorageHelper {
+  // AI-generated
   static List<Map<String, dynamic>> readJsonList(String path) {
     final file = File(path);
     if (!file.existsSync()) return [];

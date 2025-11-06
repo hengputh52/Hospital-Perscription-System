@@ -14,7 +14,6 @@ class DoctorUI {
   final DoctorRepository doctorRepo;
   final PatientRepository patientRepo;
   
-
   DoctorUI(this.prescriptionRepo, this.medicationRepo, this.doctorRepo, this.patientRepo);
 
   
@@ -293,5 +292,21 @@ class DoctorUI {
 
     doctorRepo.add(doctor);
     print('Doctor registered with id: ${doctor.id}');
+  }
+
+  /// Delete a doctor by id (calls DoctorRepository.deleteById).
+  void deleteDoctor() {
+    stdout.write('\nEnter doctor id to delete: ');
+    final id = stdin.readLineSync()?.trim();
+    if (id == null || id.isEmpty) {
+      print('Invalid id.');
+      return;
+    }
+    final removed = doctorRepo.deleteById(id);
+    if (removed) {
+      print('Doctor removed successfully.');
+    } else {
+      print('Doctor not found for id: $id');
+    }
   }
 }

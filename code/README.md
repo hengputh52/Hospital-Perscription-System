@@ -99,19 +99,3 @@ Example: a medication JSON entry:
 - If sign-up fails with `Null` errors while reading JSON, verify your JSON objects use the expected keys (e.g., `firstName`, `lastName`). The `fromJson` factories defensively coalesce alternate key names.
 
 - To see which file path a repository will use, temporarily print `Repository().filePath` in `main.dart` during startup.
-
-## Next steps / improvements
-
-- Move repositories out of domain files and into `lib/repository` uniformly (some repository classes live inside domain files currently).
-- Add unit tests that exercise the sign-up → prescription → patient-log flow.
-- Replace file-backed storage with a proper DB (sqlite/hive) if you need concurrent access or performance.
-- Add input validation, authentication, and better error handling in the UI.
-
----
-
-If you'd like, I can:
-- Add a short CONTRIBUTING/DEVELOPER guide (how to run the app locally),
-- Create sample `patients.json` and `doctors.json` seed files, or
-- Move repository implementations to consistent files under `lib/repository/` and update imports.
-
-Tell me which follow-up you'd like and I'll implement it.
