@@ -20,7 +20,6 @@ class DoctorRepository {
 
   List<Doctor> getAll() {
     final data = JsonStorageHelper.readJsonList(filePath);
-    // ignore non-map entries and be defensive about malformed JSON entries
     final maps = data.whereType<Map<String, dynamic>>();
     return maps.map((e) => Doctor.fromJson(e)).toList();
   }
@@ -35,7 +34,16 @@ class DoctorRepository {
     }
     JsonStorageHelper.writeJsonList(filePath, doctors.map((e) => e.toJson()).toList());
   }
-  
+
+  /// Delete doctor by id. Returns true if deleted, false if not found.
+  bool deleteById(String id) {
+    final doctors = getAll();
+    final initialLen = doctors.length;
+    final remaining = doctors.where((d) => d.id != id).toList();
+    if (remaining.length == initialLen) return false;
+    JsonStorageHelper.writeJsonList(filePath, remaining.map((e) => e.toJson()).toList());
+    return true;
+  }
 
   Doctor? findById(String id) {
     try {

@@ -4,11 +4,5 @@
         "firstName": "meng",
         "lastName": "heng",
         "specialization": "dentist"
-    },
-    {
-        "id": "dcf9c621-a65b-46f4-80a0-7105e93df040",
-        "firstName": "charlie",
-        "lastName": "puth",
-        "specialization": "surgery"
     }
 ]

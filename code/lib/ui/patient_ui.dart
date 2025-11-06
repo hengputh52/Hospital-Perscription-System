@@ -125,6 +125,7 @@ class PatientUI {
         print("Doctor: ${prescription.doctor_id}");
       }
 
+      // AI-generated
       print("\nMedication statuses:");
       final statusMap = med_log.medicationStatus;
       if (statusMap.isEmpty) {
@@ -149,6 +150,21 @@ class PatientUI {
           print(' - $medName (id: $medId)$details : ${taken ? "taken" : "missed"}');
         }
       }
+    }
+  }
+
+  void deletePatient() {
+    stdout.write('\nEnter patient id to delete: ');
+    final id = stdin.readLineSync()?.trim();
+    if (id == null || id.isEmpty) {
+      print('Invalid id.');
+      return;
+    }
+    final removed = patietRepo.deleteById(id);
+    if (removed) {
+      print('Patient removed successfully.');
+    } else {
+      print('Patient not found for id: $id');
     }
   }
 

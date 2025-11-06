@@ -28,7 +28,7 @@ class PrescriptionRepository {
     prescriptions.add(prescription);
     JsonStorageHelper.writeJsonList(filePath, prescriptions.map((e) => e.toJson()).toList());
   }
-
+    // AI-generate
     void update(Prescription prescription) {
     final prescriptions = getAll();
     final index = prescriptions.indexWhere((p) => p.id == prescription.id);
@@ -38,6 +38,15 @@ class PrescriptionRepository {
       prescriptions.add(prescription);
     }
     JsonStorageHelper.writeJsonList(filePath, prescriptions.map((e) => e.toJson()).toList());
+  }
+
+    bool deleteById(String id) {
+    final prescriptions = getAll();
+    final initialLen = prescriptions.length;
+    final remaining = prescriptions.where((p) => p.id != id).toList();
+    if (remaining.length == initialLen) return false;
+    JsonStorageHelper.writeJsonList(filePath, remaining.map((e) => e.toJson()).toList());
+    return true;
   }
 
   List<Prescription> getByPatientId(String patientId) {

@@ -159,12 +159,5 @@
     "description": "Reduces stomach acid and heartburn",
     "dosageForm": "tablet",
     "instruction": "Take before bed or as needed"
-  },
-  {
-    "id": "7c50d097-be22-4a80-991f-1dedfa046821",
-    "name": "para",
-    "description": "fever reliever",
-    "dosageForm": "tablet",
-    "instruction": "before meal 15 minutes"
   }
 ]

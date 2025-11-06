@@ -32,9 +32,25 @@ class PharmacistUI
         dosageForm: dosageForm,
         instruction: instruction);
 
-      medicationRepo.add(medication);
+      medicationRepo.addMedication(medication);
       print("adding medication successfully");
 
+    }
+  }
+
+  /// Delete a medication by id (calls MedicationRepository.deleteById).
+  void deleteMedication() {
+    stdout.write('\nEnter medication id to delete: ');
+    final id = stdin.readLineSync()?.trim();
+    if (id == null || id.isEmpty) {
+      print('Invalid id.');
+      return;
+    }
+    final removed = medicationRepo.deleteById(id);
+    if (removed) {
+      print('Medication removed successfully.');
+    } else {
+      print('Medication not found for id: $id');
     }
   }
 }

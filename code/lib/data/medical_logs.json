@@ -1,1 +1,21 @@
-[{"log_id":"319e394c-4683-40ed-9191-b1ae8480f344","patient_id":"f546675c-a07a-4b83-a1d4-ab0b763fb8fd","prescription_id":"b56d3703-3ed1-49aa-9174-327dfd8edbe2","dateTime":"2025-11-03T23:17:33.127933","medicationStatus":{"f774fc63-802c-4007-9d8e-65f6b849ac9c":true,"70c85916-663e-4618-a12b-d23719356e2c":true}},{"log_id":"b4c8e035-313a-4568-804e-56dde99abd36","patient_id":"ce932a8d-e0e3-4e1c-b64f-c46e3a603969","prescription_id":"9254f1db-ceb9-4f11-b582-6e84e5dfa4b7","dateTime":"2025-11-05T22:49:35.935272","medicationStatus":{"7c50d097-be22-4a80-991f-1dedfa046821":false}}]
+[
+    {
+        "log_id": "319e394c-4683-40ed-9191-b1ae8480f344",
+        "patient_id": "f546675c-a07a-4b83-a1d4-ab0b763fb8fd",
+        "prescription_id": "b56d3703-3ed1-49aa-9174-327dfd8edbe2",
+        "dateTime": "2025-11-03T23:17:33.127933",
+        "medicationStatus": {
+            "f774fc63-802c-4007-9d8e-65f6b849ac9c": true,
+            "70c85916-663e-4618-a12b-d23719356e2c": true
+        }
+    },
+    {
+        "log_id": "b4c8e035-313a-4568-804e-56dde99abd36",
+        "patient_id": "ce932a8d-e0e3-4e1c-b64f-c46e3a603969",
+        "prescription_id": "9254f1db-ceb9-4f11-b582-6e84e5dfa4b7",
+        "dateTime": "2025-11-05T22:49:35.935272",
+        "medicationStatus": {
+            "7c50d097-be22-4a80-991f-1dedfa046821": false
+        }
+    }
+]

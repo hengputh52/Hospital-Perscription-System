@@ -23,10 +23,28 @@ class MedicationRepository {
     return data.map((e) => Medication.fromJson(e)).toList();
   }
 
-  void add(Medication medication) {
+  void saveAll(List<Medication> meds) {
+    JsonStorageHelper.writeJsonList(
+      filePath,
+      meds.map((m) => m.toJson()).toList(),
+    );
+  }
+
+  void addMedication(Medication med) {
     final meds = getAll();
-    meds.add(medication);
-    JsonStorageHelper.writeJsonList(filePath, meds.map((e) => e.toJson()).toList());
+    final index = meds.indexWhere((m) => m.id == med.id);
+    if (index >= 0) meds[index] = med;
+    else meds.add(med);
+    saveAll(meds);
+  }
+
+    bool deleteById(String id) {
+    final meds = getAll();
+    final initialLen = meds.length;
+    final remaining = meds.where((m) => m.id != id).toList();
+    if (remaining.length == initialLen) return false;
+    saveAll(remaining);
+    return true;
   }
 
   Medication? findById(String id) {

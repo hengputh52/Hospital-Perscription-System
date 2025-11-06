@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:uuid/uuid.dart';
 import 'package:hospital_prescription_management/domain/prescription_item.dart';
-import 'package:hospital_prescription_management/domain/medication.dart';
+
 
 class Prescription {
   final String id;
