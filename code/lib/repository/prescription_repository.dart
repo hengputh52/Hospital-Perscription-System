@@ -5,6 +5,7 @@ import 'dart:io';
 class PrescriptionRepository {
   String get filePath {
     final candidates = [
+       'Hospital-Perscription-System/code/lib/data/prescriptions.json',
       'code/lib/data/prescriptions.json',
       'lib/data/prescriptions.json',
       'data/prescriptions.json',

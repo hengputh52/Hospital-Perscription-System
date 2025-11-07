@@ -5,9 +5,11 @@ import 'json_storage_helper.dart';
 class DoctorRepository {
   String get filePath {
     final candidates = [
+      'Hospital-Perscription-System/code/lib/data/doctors.json',
       'code/lib/data/doctors.json',
       'lib/data/doctors.json',
       'data/doctors.json',
+      
     ];
     for (final p in candidates) {
       if (File(p).existsSync()) return p;
