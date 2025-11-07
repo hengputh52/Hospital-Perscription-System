@@ -1,43 +1,67 @@
 [
-    {
-        "id": "b56d3703-3ed1-49aa-9174-327dfd8edbe2",
-        "doctor_id": "3d69fe9e-34c2-409d-b2a0-50260568f8b6",
-        "patient_id": "f546675c-a07a-4b83-a1d4-ab0b763fb8fd",
-        "diagnosis": "fever",
-        "prescription_date": "2025-11-03T20:46:36.120484",
-        "items": [
-            {
-                "id": "0482e622-7838-4311-8318-84fddb4645a7",
-                "medication_id": "f774fc63-802c-4007-9d8e-65f6b849ac9c",
-                "quantity": 1,
-                "frequency": "3 times a day",
-                "duration": 30
-            },
-            {
-                "id": "824811e7-c3d7-491c-84f3-0fb9f506cde3",
-                "medication_id": "70c85916-663e-4618-a12b-d23719356e2c",
-                "quantity": 3,
-                "frequency": "3 times a day",
-                "duration": 15
-            }
-        ],
-        "note": "avoid cold water"
-    },
-    {
-        "id": "9254f1db-ceb9-4f11-b582-6e84e5dfa4b7",
-        "doctor_id": "dcf9c621-a65b-46f4-80a0-7105e93df040",
-        "patient_id": "ce932a8d-e0e3-4e1c-b64f-c46e3a603969",
-        "diagnosis": "cold",
-        "prescription_date": "2025-11-05T22:45:40.545954",
-        "items": [
-            {
-                "id": "19289f63-a14b-484a-9a7b-68100559bf40",
-                "medication_id": "7c50d097-be22-4a80-991f-1dedfa046821",
-                "quantity": 1,
-                "frequency": "2 times a day",
-                "duration": 3
-            }
-        ],
-        "note": "do not drink cold water"
-    }
+  {
+    "id": "b56d3703-3ed1-49aa-9174-327dfd8edbe2",
+    "doctor_id": "3d69fe9e-34c2-409d-b2a0-50260568f8b6",
+    "patient_id": "f546675c-a07a-4b83-a1d4-ab0b763fb8fd",
+    "diagnosis": "fever",
+    "prescription_date": "2025-11-03T20:46:36.120484",
+    "items": [
+      {
+        "id": "0482e622-7838-4311-8318-84fddb4645a7",
+        "medication_id": "f774fc63-802c-4007-9d8e-65f6b849ac9c",
+        "quantity": 1,
+        "frequency": "3 times a day",
+        "duration": 30
+      },
+      {
+        "id": "824811e7-c3d7-491c-84f3-0fb9f506cde3",
+        "medication_id": "70c85916-663e-4618-a12b-d23719356e2c",
+        "quantity": 3,
+        "frequency": "3 times a day",
+        "duration": 15
+      }
+    ],
+    "note": "avoid cold water"
+  },
+  {
+    "id": "9254f1db-ceb9-4f11-b582-6e84e5dfa4b7",
+    "doctor_id": "dcf9c621-a65b-46f4-80a0-7105e93df040",
+    "patient_id": "ce932a8d-e0e3-4e1c-b64f-c46e3a603969",
+    "diagnosis": "cold",
+    "prescription_date": "2025-11-05T22:45:40.545954",
+    "items": [
+      {
+        "id": "19289f63-a14b-484a-9a7b-68100559bf40",
+        "medication_id": "7c50d097-be22-4a80-991f-1dedfa046821",
+        "quantity": 1,
+        "frequency": "2 times a day",
+        "duration": 3
+      }
+    ],
+    "note": "do not drink cold water"
+  },
+  {
+    "id": "fe317b5d-7b26-405c-ab13-960b6e0d5517",
+    "doctor_id": "f3f22149-1aa2-4b6c-ae85-1f2ba36e5d8f",
+    "patient_id": "7165bf57-e0b0-404e-9cee-20b1b7f755c1",
+    "diagnosis": "fever",
+    "prescription_date": "2025-11-07T20:30:04.044215",
+    "items": [
+      {
+        "id": "5353676b-bdb5-45e4-a916-280114316fbd",
+        "medication_id": "1ea8e807-b926-4c82-aaa9-3285da40deb0",
+        "quantity": 1,
+        "frequency": "2 times a day",
+        "duration": 3
+      },
+      {
+        "id": "cad9bab6-0769-4879-8e18-6e90b79a99a0",
+        "medication_id": "f774fc63-802c-4007-9d8e-65f6b849ac9c",
+        "quantity": 1,
+        "frequency": "2 times day",
+        "duration": 2
+      }
+    ],
+    "note": "drink hot water"
+  }
 ]

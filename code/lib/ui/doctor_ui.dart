@@ -239,6 +239,21 @@ class DoctorUI {
     print('Doctor registered with id: ${doctor.id}');
   }
 
+    void deletePrescription() {
+    stdout.write('\nEnter prescription id to delete: ');
+    final id = stdin.readLineSync()?.trim();
+    if (id == null || id.isEmpty) {
+      print('Invalid id.');
+      return;
+    }
+    final removed = prescriptionRepo.deleteById(id);
+    if (removed) {
+      print('Prescription removed successfully: $id');
+    } else {
+      print('Prescription not found for id: $id');
+    }
+  }
+
   void displayAllPrescriptions()
   {
     final allPrescription = prescriptionRepo.getAll();
