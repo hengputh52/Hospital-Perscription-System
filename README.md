@@ -1,4 +1,5 @@
 # Hospital Prescription System
+This project is built by Lon Mengheng and May Kunaphivath from Software Egnineering (G2) at Cambodia Academy of Digital Technology
 
 Small file-backed Hospital Prescription & Medication Tracking console app in Dart. Data is stored as JSON files under `lib/data/`.
 
