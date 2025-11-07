@@ -84,7 +84,7 @@ void main() {
               doctorUI.updatePrescription();
               break;
             case 7:
-              doctorUI.deleteDoctor();
+              doctorUI.deletePrescription();
             case 8:
               patientUI.viewMedical_log();
               break;
