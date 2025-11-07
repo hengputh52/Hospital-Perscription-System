@@ -2,10 +2,11 @@ import 'package:hospital_prescription_management/domain/patient.dart';
 import 'package:hospital_prescription_management/repository/medication_repository.dart';
 import 'package:hospital_prescription_management/repository/patient_repository.dart';
 import 'package:hospital_prescription_management/repository/prescription_repository.dart';
-import '../repository/medical_log_repository.dart';
-import 'package:hospital_prescription_management/domain/medication.dart';
-import '../domain/medical_log.dart';
 import 'dart:io';
+
+import '../repository/medical_log_repository.dart';
+import '../domain/medical_log.dart';
+import '../domain/medication.dart';
 
 class PatientUI {
   final MedicalLogRepository logRepo;
@@ -15,28 +16,39 @@ class PatientUI {
 
   PatientUI(this.logRepo, this.patietRepo, this.prescriptionRepo, this.medicationRepo);
 
-  void signUpPatient()
-  {
+  Gender? _parseGender(String? input) {
+    if (input == null) return null;
+    final v = input.trim().toLowerCase();
+    if (v == 'm' || v == 'male') return Gender.male;
+    if (v == 'f' || v == 'female') return Gender.female;
+    return null;
+  }
+
+  void signUpPatient() {
     print("\n");
     print("--- Patient sign up ---");
     stdout.write('First name: ');
-    final firstName = stdin.readLineSync() ?? '';
+    final firstName = stdin.readLineSync()!;
     stdout.write('Last name: ');
-    final lastName = stdin.readLineSync() ?? '';
+    final lastName = stdin.readLineSync()!;
     stdout.write('Age: ');
-    final age = int.parse(stdin.readLineSync()!);
-    stdout.write('contact: ');
-    final contact = stdin.readLineSync() ?? '';
+    final age = int.tryParse(stdin.readLineSync()!) ?? 0;
+    stdout.write('Contact: ');
+    final contact = stdin.readLineSync()!;
+    stdout.write('Gender (m/f/o) [optional]: ');
+    final genderInput = stdin.readLineSync();
+    final gender = _parseGender(genderInput)!;
 
     final patient = Patient(
       firstName: firstName,
       lastName: lastName,
       age: age,
-      contact: contact);
+      contact: contact,
+      gender: gender, // new field
+    );
 
     patietRepo.add(patient);
     print("Patient registed successfully with id : ${patient.id}");
-
   }
 
   void trackPrescription()

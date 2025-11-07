@@ -22,11 +22,6 @@ class Prescription {
   })  : id = id ?? const Uuid().v4();
 
 
-  void addPrescriptionItem(PrescriptionItem item) {
-    items.add(item);
-  }
-
-
   factory Prescription.fromJson(Map<String, dynamic> json) {
     final itemsJson = (json['items'] as List<dynamic>? ?? []);
     return Prescription(

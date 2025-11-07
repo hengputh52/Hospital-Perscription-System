@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:test/test.dart';
 
 import 'package:hospital_prescription_management/domain/doctor.dart';
+import 'package:hospital_prescription_management/domain/patient.dart' as p;
 import 'package:hospital_prescription_management/domain/prescription.dart';
 import 'package:hospital_prescription_management/domain/prescription_item.dart';
 import 'package:hospital_prescription_management/domain/medication.dart';
-import 'package:hospital_prescription_management/domain/patient.dart';
 
 import 'package:hospital_prescription_management/repository/doctor_repository.dart';
 import 'package:hospital_prescription_management/repository/patient_repository.dart';
@@ -32,7 +32,6 @@ void main() {
   });
 
   tearDownAll(() {
-    // AI -generated
     // restore originals
     for (final entry in originalFiles.entries) {
       final path = entry.key;
@@ -82,7 +81,13 @@ void main() {
     test('Doctor add/update/delete', () {
       final before = docRepo.getAll().length;
 
-      final doctor = Doctor(firstName: 'Test', lastName: 'Doctor', specialization: 'TestSpec');
+      final doctor = Doctor(
+        firstName: 'Test',
+        lastName: 'Doctor',
+        specialization: 'TestSpec',
+        gender: Gender.male,
+        contactInfo: '',
+      );
       docRepo.add(doctor);
 
       final got = docRepo.findById(doctor.id);
@@ -94,7 +99,7 @@ void main() {
         id: doctor.id,
         firstName: doctor.firstName,
         lastName: doctor.lastName,
-        specialization: 'UpdatedSpec',
+        specialization: 'UpdatedSpec', gender: Gender.male, contactInfo: '0089893983',
       );
       docRepo.add(updated);
       final got2 = docRepo.findById(doctor.id);
@@ -110,14 +115,14 @@ void main() {
     test('Patient add/update/delete', () {
       final before = patRepo.getAll().length;
 
-      // Attempt to construct patient with common constructor shape.
-      final patient = Patient(
+      final patient = p.Patient(
         firstName: 'TestP',
         lastName: 'User',
         age: 30,
         contact: '0123456789',
+        gender: p.Gender.male,
       );
-      // addOrUpdate exists in repository
+      // add/update exists in repository
       patRepo.add(patient);
 
       final got = patRepo.findById(patient.id);
@@ -125,12 +130,13 @@ void main() {
       expect(got!.firstName, equals('TestP'));
 
       // update field and call update()
-      final updated = Patient(
+      final updated = p.Patient(
         id: patient.id,
         firstName: patient.firstName,
         lastName: patient.lastName,
         age: 31,
         contact: patient.contact,
+        gender: patient.gender,
       );
       patRepo.add(updated);
       final got2 = patRepo.findById(patient.id);
@@ -155,9 +161,9 @@ void main() {
       medRepo.addMedication(med);
 
       // create doctor and patient
-      final doctor = Doctor(firstName: 'Dpres', lastName: 'One', specialization: 'Spec');
+      final doctor = Doctor(firstName: 'Dpres', lastName: 'One', specialization: 'Spec', gender: Gender.male, contactInfo: '09987774');
       docRepo.add(doctor);
-      final patient = Patient(firstName: 'Ppres', lastName: 'One', age: 40, contact: '000');
+      final patient = p.Patient(firstName: 'Ppres', lastName: 'One', age: 40, contact: '000', gender: p.Gender.male);
       patRepo.add(patient);
 
       // build prescription

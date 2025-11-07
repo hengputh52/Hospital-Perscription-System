@@ -193,6 +193,52 @@ class DoctorUI {
     print('Prescription updated and saved.');
   }
 
+  Gender? _parseGender(String? input) {
+    if (input == null) return null;
+    final v = input.trim().toLowerCase();
+    if (v == 'm' || v == 'male') return Gender.male;
+    if (v == 'f' || v == 'female') return Gender.female;
+    if (v == 'o' || v == 'other') return Gender.female; // fallback to female if 'o' not supported in enum
+    return null;
+  }
+
+  void signUpDoctor() {
+    print("\n");
+    print('--- Doctor Sign Up ---');
+    stdout.write('First name: ');
+    final firstName = stdin.readLineSync() ?? '';
+    stdout.write('Last name: ');
+    final lastName = stdin.readLineSync() ?? '';
+    stdout.write('Specialization: ');
+    final specialization = stdin.readLineSync() ?? '';
+
+    // Require a valid gender value because Doctor.gender is non-nullable
+    Gender? gender;
+    while (gender == null) {
+      stdout.write('Gender (m/f) [required]: ');
+      final genderInput = stdin.readLineSync();
+      gender = _parseGender(genderInput);
+      if (gender == null) {
+        print('Invalid gender. Enter "m" or "f".');
+      }
+    }
+
+    stdout.write('Contact (phone/email) [optional]: ');
+    final contactInput = stdin.readLineSync();
+    final contact = (contactInput != null && contactInput.trim().isNotEmpty) ? contactInput.trim() : '';
+
+    final doctor = Doctor(
+      firstName: firstName,
+      lastName: lastName,
+      specialization: specialization,
+      gender: gender,
+      contactInfo: contact,
+    );
+
+    doctorRepo.add(doctor);
+    print('Doctor registered with id: ${doctor.id}');
+  }
+
   void displayAllPrescriptions()
   {
     final allPrescription = prescriptionRepo.getAll();
@@ -213,7 +259,10 @@ class DoctorUI {
       {
         print("Doctor FirstName: ${doctor.firstName}");
         print("Doctor Last Name: ${doctor.lastName}");
+        print("Gender: ${doctor.gender}");
         print("Specialization: ${doctor.specialization}");
+        print("Contact: ${doctor.contactInfo}");
+        
       }
       //print('Patient: ${all.patient_id}');
       for(final patient in allPatient)
@@ -221,6 +270,7 @@ class DoctorUI {
         print("Patient FirstName: ${patient.firstName}");
         print("Patient Last Name: ${patient.lastName}");
         print("Age: ${patient.age}");
+        print("Gender: ${patient.gender}");
         print("Contact: ${patient.contact}");
       }
       print('Diagnosis: ${all.diagnosis}');
@@ -240,8 +290,6 @@ class DoctorUI {
       }
     }
   }
-
-
   void displayPrescriptionByPatientID(String patientID)
   {
     final patientPrescription = prescriptionRepo.getByPatientId(patientID);
@@ -249,13 +297,16 @@ class DoctorUI {
     final medicationInfo = medicationRepo.getAll();
     for(final presctiption in patientPrescription)
     {
-      print("\n=== Prescription ${presctiption.id}");
-      //print('Doctor: ${presctiption.doctor_id}');
-      print("Patient First Name: ${patientInfo!.firstName}");
-      print("Patient First Name: ${patientInfo.lastName}");
-      print("Patient First Name: ${patientInfo.age}");
-      print("Patient First Name: ${patientInfo.contact}");
-      //print('Patient: ${presctiption.patient_id}');
+      print("\n=== Prescription ${presctiption.id} ===");
+      if (patientInfo != null) {
+        print("Patient First Name: ${patientInfo.firstName}");
+        print("Patient Last Name: ${patientInfo.lastName}");
+        print("Patient Gender: ${patientInfo.gender}");
+        print("Patient Age: ${patientInfo.age}");
+        print("Patient Contact: ${patientInfo.contact}");
+      } else {
+        print("Patient id: ${presctiption.patient_id}");
+      }
       print('Diagnosis: ${presctiption.diagnosis}');
       print('Date: ${presctiption.prescription_date.toIso8601String()}');
       if (presctiption.note != null && presctiption.note!.isNotEmpty) print('Note: ${presctiption.note}');
@@ -265,8 +316,8 @@ class DoctorUI {
         {
           if(medication.id == med.medication_id)
           {
-            print(' - Mediation: ${medication.name}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
-            print("Description: ${medication.description}, Instruction: ${medication.instruction}");
+            print(' - Medication: ${medication.name}, qty: ${med.quantity}, freq: ${med.frequency}, duration: ${med.duration}');
+            print("  Description: ${medication.description}, Instruction: ${medication.instruction}");
           }
         }
       }
@@ -274,27 +325,6 @@ class DoctorUI {
     
   }
 
-  void signUpDoctor() {
-    print("\n");
-    print('--- Doctor Sign Up ---');
-    stdout.write('First name: ');
-    final firstName = stdin.readLineSync() ?? '';
-    stdout.write('Last name: ');
-    final lastName = stdin.readLineSync() ?? '';
-    stdout.write('Specialization: ');
-    final specialization = stdin.readLineSync() ?? '';
-
-    final doctor = Doctor(
-      firstName: firstName,
-      lastName: lastName,
-      specialization: specialization,
-    );
-
-    doctorRepo.add(doctor);
-    print('Doctor registered with id: ${doctor.id}');
-  }
-
-  /// Delete a doctor by id (calls DoctorRepository.deleteById).
   void deleteDoctor() {
     stdout.write('\nEnter doctor id to delete: ');
     final id = stdin.readLineSync()?.trim();
@@ -302,11 +332,13 @@ class DoctorUI {
       print('Invalid id.');
       return;
     }
+
     final removed = doctorRepo.deleteById(id);
     if (removed) {
-      print('Doctor removed successfully.');
+      print('Doctor removed successfully: $id');
     } else {
       print('Doctor not found for id: $id');
     }
   }
+
 }

@@ -4,6 +4,7 @@
         "firstName": "meng",
         "lastName": "heng",
         "age": 18,
+        "gender": "male",
         "contact": "09987889"
     },
     {
@@ -11,6 +12,7 @@
         "firstName": "bro",
         "lastName": "wath",
         "age": 20,
+        "gender": "male",
         "contact": "093549584988"
     }
 ]
